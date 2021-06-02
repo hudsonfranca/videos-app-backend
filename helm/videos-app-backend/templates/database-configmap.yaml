@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-database-configmap
+data:
+  db_user: {{ .Values.database.user }}
+  db_host:  {{ .Values.database.host }}
+  pg_port:  {{ .Values.database.port }}
+  database: {{ .Values.database.database }}

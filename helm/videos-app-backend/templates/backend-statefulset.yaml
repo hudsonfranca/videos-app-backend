@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Release.Name }}-backend-statefulset
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: {{ .Release.Name }}-backend
+        image: hudsonfranca/videosapp_backend: {{ .Values.backend.tag }}
+        ports:
+        - containerPort: 4000
+        env:
+          - name: PG_USER
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}-database-configmap
+                key: db_user
+          - name: PG_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}-database-configmap
+                key: db_host
+          - name: PG_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}-database-configmap
+                key: pg_port
+          - name: PG_DATABASE
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}-database-configmap
+                key: database
+          - name: PG_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Release.Name }}-database-secret
+                key: db_password
+          - name: JWT_KEY
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Release.Name }}-jwt-secret
+                key: jwt_key
+        volumeMounts:
+          - mountPath: /usr/src/app/uploads
+            name: backend-pvc     
+  volumeClaimTemplates:
+  - metadata:
+      name: backend-pvc
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: do-block-storage
+
+  
+
+

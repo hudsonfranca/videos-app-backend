@@ -3,7 +3,8 @@ kind: StatefulSet
 metadata:
   name: {{ .Release.Name }}-backend-statefulset
 spec:
-  replicas: 3
+  replicas: 2
+  serviceName: {{ .Release.Name }}-backend-service
   selector:
     matchLabels:
       app: backend
@@ -14,7 +15,14 @@ spec:
     spec:
       containers:
       - name: {{ .Release.Name }}-backend
-        image: hudsonfranca/videosapp_backend: {{ .Values.backend.tag }}
+        image: hudsonfranca/videosapp_backend:{{ .Values.tag }}
+        resources:
+          limits:
+            cpu: "1"
+            memory: "2Gi"
+          requests:
+            cpu: "0.5"
+            memory: "1Gi"
         ports:
         - containerPort: 4000
         env:
@@ -54,13 +62,13 @@ spec:
   volumeClaimTemplates:
   - metadata:
       name: backend-pvc
-      spec:
-        accessModes:
-        - ReadWriteOnce
-        resources:
-          requests:
-            storage: 10Gi
-        storageClassName: do-block-storage
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 10Gi
+      storageClassName: do-block-storage
 
   
 

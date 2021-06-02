@@ -7,6 +7,6 @@ database:
   database: postgres
   host: database-service
 
-  backend:
-    tag: latest
+  
+tag: latest
 

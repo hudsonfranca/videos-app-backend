@@ -20,6 +20,7 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 @Controller('video')
 export class VideoController {
   constructor(private videoService: VideoService) {}
+  
 
   @UseGuards(JwtAuthGuard)
   @Post()

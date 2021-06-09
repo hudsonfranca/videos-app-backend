@@ -27,6 +27,8 @@ COPY . .
 
 COPY --from=development /usr/src/app/dist ./dist
 
+RUN mkdir -p /uploads
+
 EXPOSE 4000
 
 CMD ["node", "dist/main"]

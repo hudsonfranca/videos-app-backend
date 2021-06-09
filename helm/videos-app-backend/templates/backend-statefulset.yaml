@@ -2,30 +2,38 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: {{ .Release.Name }}-backend-statefulset
+  labels:
+    app: backend
 spec:
-  replicas: 2
+  replicas: 1
   serviceName: {{ .Release.Name }}-backend-service
   selector:
     matchLabels:
       app: backend
   template:
     metadata:
+      name: backend 
       labels:
         app: backend
+      annotations:
+        rollme: {{ randAlphaNum 5 | quote }}
     spec:
       containers:
       - name: {{ .Release.Name }}-backend
         image: hudsonfranca/videosapp_backend:{{ .Values.tag }}
         resources:
           limits:
-            cpu: "1"
-            memory: "2Gi"
+            cpu: "0.5"
+            memory: "600Mi"
           requests:
             cpu: "0.5"
-            memory: "1Gi"
+            memory: "300Mi"
         ports:
         - containerPort: 4000
+          name: backend
         env:
+          - name: PORT
+            value: "{{ .Values.port }}"
           - name: PG_USER
             valueFrom:
               configMapKeyRef:
@@ -56,18 +64,23 @@ spec:
               secretKeyRef:
                 name: {{ .Release.Name }}-jwt-secret
                 key: jwt_key
+          - name: BACKEND_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}-backend-configmap
+                key: backendUrl
         volumeMounts:
-          - mountPath: /usr/src/app/uploads
-            name: backend-pvc     
+          - name: {{ .Release.Name }}-backend-pvc 
+            mountPath: /usr/src/app/uploads    
   volumeClaimTemplates:
   - metadata:
-      name: backend-pvc
+      name: {{ .Release.Name }}-backend-pvc
     spec:
       accessModes:
       - ReadWriteOnce
       resources:
         requests:
-          storage: 10Gi
+          storage: 3Gi
       storageClassName: do-block-storage
 
   

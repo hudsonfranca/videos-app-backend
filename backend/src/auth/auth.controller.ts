@@ -54,9 +54,7 @@ export class AuthController {
       profilePicture,
     );
 
-    response.cookie('authorization', `${access_token}`, {
-      httpOnly: false,
-    });
+    response.cookie('authorization', `${access_token}`);
 
     return user;
   }
@@ -66,9 +64,7 @@ export class AuthController {
   async login(@Request() req, @Res({ passthrough: true }) response: Response) {
     const { access_token } = await this.authService.login(req.user);
 
-    response.cookie('authorization', `${access_token}`, {
-      httpOnly: false,  
-    });
+    response.cookie('authorization', `${access_token}`);
 
     return { message: 'success' };
   }

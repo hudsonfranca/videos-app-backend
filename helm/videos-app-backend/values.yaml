@@ -1,12 +1,16 @@
-jwtKey: and0a2V5MTIzNDU=
+jwtKey: bWV1c2Vncm
 
 database:
-  password: YWRtaW4=
+  password: password
   user: admin
   port: 5432
-  database: postgres
-  host: database-service
+  database: defaultdb
+  host: videos-app-database
 
   
 tag: latest
+
+port: 4000
+
+backendUrl: http://www.videosapp.ml/api
 

@@ -29,7 +29,7 @@ export class User {
 
   @AfterLoad()
   addHostUrl() {
-    this.profilePicture = `http://videosapp/api/${this.profilePicture}`;
+    this.profilePicture = `${process.env.BACKEND_URL}${this.profilePicture}`;
   }
 
   @CreateDateColumn()

@@ -6,7 +6,7 @@ import { VideoModule } from './video/video.module';
 import { AuthModule } from './auth/auth.module';
 import { VideoTagModule } from './video-tag/video-tag.module';
 import { CommentModule } from './comment/comment.module';
-import * as connectionOptions from './ormconfig';
+
 
 @Module({
   imports: [

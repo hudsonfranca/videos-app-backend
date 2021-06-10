@@ -3,6 +3,7 @@
 /node_modules
 .env
 certificate.crt
+/uploads
 
 # Logs
 logs

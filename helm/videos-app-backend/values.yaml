@@ -1,11 +1,11 @@
-jwtKey: bWV1c2Vncm
+jwtKey: c2VjcmV0
 
 database:
-  password: password
+  password: YWRtaW4=
   user: admin
   port: 5432
-  database: defaultdb
-  host: videos-app-database
+  database: postgres
+  host: database-service
 
   
 tag: latest

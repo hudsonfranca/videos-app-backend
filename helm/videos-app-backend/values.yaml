@@ -1,11 +1,11 @@
 jwtKey: c2VjcmV0
 
 database:
-  password: c3c1Z2x0ejlvYjJsNWNnNg==
+  password: c3c1Z2x0ej
   user: doadmin
   port: 25060
   database: defaultdb
-  host: videos-app-database-do-user-9299651-0.b.db.ondigitalocean.com
+  host: videos-app-database
 
   
 tag: latest

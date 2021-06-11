@@ -11,6 +11,7 @@ import { User } from '../user/user.entity';
 import { Video_Tag } from '../video-tag/video-tag.entity';
 import { Repository } from 'typeorm';
 import { Video } from './video.entity';
+import * as fs from 'fs';
 
 @Injectable()
 export class VideoService {
@@ -80,9 +81,17 @@ export class VideoService {
 
   async delete(id: string) {
     const video = await this.findById(id);
-
+    const base = process.env.PWD;
+    const {filename} = video;
     try {
       await this.videoRepository.remove(video);
+      try {
+        fs.unlinkSync(base + `/uploads/${filename}`);
+    
+        console.log(`video ${filename} deletado.`);
+    } catch (error) {
+        console.log(error);
+    }
       return true;
     } catch (error) {
       throw new InternalServerErrorException(

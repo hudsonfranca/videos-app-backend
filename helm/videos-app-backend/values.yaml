@@ -1,16 +1,16 @@
 jwtKey: c2VjcmV0
 
 database:
-  password: YWRtaW4=
-  user: admin
-  port: 5432
-  database: postgres
-  host: database-service
+  password: c3c1Z2x0ejlvYjJsNWNnNg==
+  user: doadmin
+  port: 25060
+  database: defaultdb
+  host: videos-app-database-do-user-9299651-0.b.db.ondigitalocean.com
 
   
 tag: latest
 
 port: 4000
 
-backendUrl: http://www.videosapp.ml/api
+backendUrl: http://videosapp.ml/api
 

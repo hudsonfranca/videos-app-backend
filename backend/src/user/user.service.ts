@@ -36,9 +36,14 @@ export class UserService {
       profilePicture: `/uploads/${profilePicture.filename}`,
     });
 
-    const user = await this.userRepository.save(userEntity);
+    try {
+      const user = await this.userRepository.save(userEntity);
 
-    return await this.findUserById(user.id);
+      return await this.findUserById(user.id);
+    } catch (error) {
+      throw new InternalServerErrorException("Não foi possível cadastrar o usuário.")
+    }
+    
   }
 
   async findUserById(id: string): Promise<User> {

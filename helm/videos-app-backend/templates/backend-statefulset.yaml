@@ -23,11 +23,11 @@ spec:
         image: hudsonfranca/videosapp_backend:{{ .Values.tag }}
         resources:
           limits:
-            cpu: "0.5"
-            memory: "600Mi"
+            cpu: "0.9"
+            memory: "900Mi"
           requests:
-            cpu: "0.5"
-            memory: "300Mi"
+            cpu: "0.6"
+            memory: "600Mi"
         ports:
         - containerPort: 4000
           name: backend
@@ -80,7 +80,7 @@ spec:
       - ReadWriteOnce
       resources:
         requests:
-          storage: 3Gi
+          storage: 10Gi
       storageClassName: do-block-storage
 
   

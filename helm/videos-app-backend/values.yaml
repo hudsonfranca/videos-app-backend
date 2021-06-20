@@ -1,11 +1,11 @@
-jwtKey: c2VjcmV0
+jwtKey: ZXhldnoz
 
 database:
-  password: c3c1Z2x0ej
+  password: eHlzbnM0
   user: doadmin
   port: 25060
-  database: defaultdb
-  host: videos-app-database
+  database: videos-app-db
+  host: portifolio-db
 
   
 tag: latest
